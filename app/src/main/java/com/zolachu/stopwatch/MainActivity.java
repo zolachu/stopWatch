@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 int hours = seconds/3600;
                 int minutes = (seconds - hours * 3600) / 60;
                 int second = seconds % 60;
-                String time = String.format("%d:%02d:%02d", hours, minutes, second);
+                String time = String.format(getString(R.string.time_format), hours, minutes, second);
                 tvTime = findViewById(R.id.time_view);
                 tvTime.setText(time);
                 if (running) {
