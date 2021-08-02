@@ -20,8 +20,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        running = savedInstanceState.getBoolean("running");
-        seconds = savedInstanceState.getInt("seconds");
+        if (savedInstanceState != null) {
+            running = savedInstanceState.getBoolean("running");
+            seconds = savedInstanceState.getInt("seconds");
+        }
+
         setContentView(R.layout.activity_main);
         runTimer();
     }
