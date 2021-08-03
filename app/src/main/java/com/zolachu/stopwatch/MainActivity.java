@@ -15,26 +15,44 @@ public class MainActivity extends AppCompatActivity {
     TextView tvTime;
     private boolean running;
     private int seconds = 0;
-
+    private boolean wasRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         if (savedInstanceState != null) {
             running = savedInstanceState.getBoolean("running");
             seconds = savedInstanceState.getInt("seconds");
+            wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
 
-        setContentView(R.layout.activity_main);
         runTimer();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
-//        super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putBoolean("running", running);
         savedInstanceState.putInt("seconds", seconds);
+        savedInstanceState.putBoolean("wasRunning", wasRunning);
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        wasRunning = running;
+        running = false;
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (wasRunning == true) {
+            running = true;
+        }
     }
 
     public void onClickStart(View v) {
