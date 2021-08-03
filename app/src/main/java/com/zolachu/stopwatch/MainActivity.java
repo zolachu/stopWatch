@@ -38,13 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        wasRunning = running;
-        running = false;
 
-    }
 
     @Override
     protected void onStart() {
@@ -54,6 +48,30 @@ public class MainActivity extends AppCompatActivity {
             running = true;
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (wasRunning) {
+            running = true;
+        }
+    }
+
+    protected void onPause() {
+        super.onPause();
+        wasRunning = running;
+        running = false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        wasRunning = running;
+        running = false;
+
+    }
+
+
 
     public void onClickStart(View v) {
         running = true;
